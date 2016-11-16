@@ -15,7 +15,8 @@ void send_heartbeat() {
     int status;
     char *buffer;
     size_t buffer_size = get_buffered_log(&buffer);
-    status = HTTP.PUT(url, buffer, buffer_size, "", resp, sizeof(resp));
+    string headers = "Content-Type: text/plain;\r\n";
+    status = HTTP.PUT(url, buffer, buffer_size, headers, resp, sizeof(resp));
 
     if (status != 200) {
         Logging.errorlnf("heartbeat error: server returned %d", status);
